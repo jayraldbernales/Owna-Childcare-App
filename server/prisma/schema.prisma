@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int    @id @default(autoincrement())
+  firstname String @db.VarChar(100)
+  lastname  String @db.VarChar(100)
+  email     String @unique @db.VarChar(255)
+  password  String @db.VarChar(255)
+  role      String @default("user") @db.VarChar(50)
+
+  notifications Notification[]
+
+  parentLinks ParentChild[]
+  children    Child[]       @relation("CreatedChildren")
+}
+
+model Child {
+  id          Int      @id @default(autoincrement())
+  firstname   String   @db.VarChar(100)
+  lastname    String   @db.VarChar(100)
+  gender      String   @db.VarChar(10)
+  dateOfBirth DateTime
+  age         Int
+
+  linkCode String? @unique @db.VarChar(10)
+
+  createdById Int
+  createdBy   User @relation("CreatedChildren", fields: [createdById], references: [id])
+
+  parents       ParentChild[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  message   String   @db.VarChar(500)
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user  User   @relation(fields: [userId], references: [id])
+}
+
+model ParentChild {
+  userId  Int
+  childId Int
+
+  user  User  @relation(fields: [userId], references: [id])
+  child Child @relation(fields: [childId], references: [id])
+
+  @@id([userId, childId])
+  @@unique([userId, childId])
+}
