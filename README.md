@@ -1,6 +1,5 @@
-# MARINA APP 
-A mobile marketplace for seafood products that connects vendors, buyers, and riders, with real-time ordering and delivery, plus an admin web dashboard.
+# OWNA CHILDCARE SYSTEM 
 
-The project earned 1st Place in the Video Testimonial Category at BIDA ASENSO 2026, organized by CVAARRDEC in partnership with PCAARRD.”
+A full-stack platform developed during my remote internship, building frontend and backend features. Recreated an Australian website design with pixel-perfect accuracy.
 
-🎥 [Watch Video Testimonial](https://www.youtube.com/watch?v=BHqb87x6AyQ)
+🎥 [Watch Video Testimonial](https://www.youtube.com/watch?v=BNdoR5_K-zs)
